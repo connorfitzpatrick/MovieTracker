@@ -2,17 +2,16 @@ import React, {useEffect, useContext} from 'react';
 import MovieFinder from '../apis/MovieFinder';
 import { MoviesContext } from '../context/MoviesContext';
 
-// eslint-disable-next-line no-unused-vars
 const MovieList = (props) => {
-    // eslint-disable-next-line no-unused-vars
     const {movies, setMovies} = useContext(MoviesContext);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await MovieFinder.get("/");
-                // eslint-disable-next-line no-unused-vars
                 setMovies(response.data.data.movies);
-            } catch (err) {}
+            } catch (err) {
+                console.log(err)
+            }
         };
 
         fetchData();
@@ -33,19 +32,23 @@ const MovieList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Shawshank</td>
-                        <td>Frank Darabont</td>
-                        <td>9.5</td>
-                        <td>98%</td>
-                        <td>99%</td>
-                        <td>
-                            <button className="btn btn-warning">Watched</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-warning">Delete</button>
-                        </td>
-                    </tr>
+                    {movies && movies.map((m) => {
+                        return (
+                            <tr key={m.id}>
+                                <td>{m.movie_name}</td>
+                                <td>{m.director}</td>
+                                <td>{m.imdb_rating}</td>
+                                <td>{m.tomatoes_critics}</td>
+                                <td>{m.tomatoes_audience}</td>
+                                <td>
+                                    <button className="btn btn-warning">Watched</button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
         </div>
