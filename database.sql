@@ -16,3 +16,20 @@ INSERT INTO movies (movie_name, director, imdb_rating, tomatoes_critics, tomatoe
 INSERT INTO movies (movie_name, director, imdb_rating, tomatoes_critics, tomatoes_audience, watched) values ('Shrek', 'Vicky Jenson', 8.7, '86%', '89%', TRUE);
 INSERT INTO movies (movie_name, director, imdb_rating, tomatoes_critics, tomatoes_audience, watched) values ('2001 A Space Odyssey', 'Stanley Kubrick', 8.3, '78%', '65%', FALSE);
 
+CREATE TABLE topmovies (
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+    movie_name VARCHAR(200),
+    director VARCHAR(200),
+    release_year int,
+    ranking decimal,
+    watched BOOLEAN,
+    in_top BOOLEAN
+);
+
+INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('The Prestige', 'Christopher Nolan', 2005, 8.7, TRUE, TRUE);
+INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('Predator', 'John McTiernan', 1987, 8.9, TRUE, TRUE);
+INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('The Dark Knight', 'Christopher Nolan', 2009, 9.0, TRUE, TRUE);
+INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('The Room', 'Tommy Wiseau', 2002, 6.1, FALSE, TRUE);
+INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('Cats', 'Tom Hooper', 2020, 4.0, FALSE, FALSE);
+INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('Shrek', 'Vicky Jenson', 2002, 8.7, TRUE, TRUE);
+INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('2001 A Space Odyssey', 'Stanley Kubrick', 1967, 8.3, TRUE, TRUE);
