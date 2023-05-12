@@ -12,7 +12,7 @@ app.use(express.json());
 // get all movies
 app.get("/api/v1/movies", async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM movies");
+        const results = await db.query("SELECT * FROM topmovies ORDER BY ranking desc");
         res.status(200).json({
             status: "success",
             results: results.rows.length,
@@ -29,7 +29,7 @@ app.get("/api/v1/movies", async (req, res) => {
 // Get one movie
 app.get("/api/v1/movies/:id", async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM movies WHERE id = $1", [
+        const results = await db.query("SELECT * FROM topmovies WHERE id = $1", [
             req.params.id,
         ]);
         res.status(200).json({
@@ -48,9 +48,9 @@ app.post("/api/v1/movies", async (req, res) => {
     console.log(req.body);
     try {
         const results = await db.query(
-            "INSERT INTO movies (movie_name, director, imdb_rating, tomatoes_critics, tomatoes_audience, watched) values ($1, $2, $3, $4, $5, $6) returning *",
-            [req.body.movie_name, req.body.director, req.body.imdb_rating, req.body.tomatoes_critics, 
-                req.body.tomatoes_audience, req.body.watched]
+            "INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ($1, $2, $3, $4, $5, $6) returning *",
+            [req.body.movie_name, req.body.director, req.body.release_year, req.body.ranking, 
+                req.body.watched, req.body.in_top]
         );
         console.log(results);
         res.status(201).json({
@@ -68,8 +68,8 @@ app.post("/api/v1/movies", async (req, res) => {
 app.put("/api/v1/movies/:id", async (req, res) => {
     try {
         const results = await db.query(
-            "UPDATE Movies SET movie_name = $1, director = $2, imdb_rating = $3, tomatoes_critics = $4, tomatoes_audience = $5, watched = $6 WHERE id = $7 returning *",
-            [req.body.movie_name, req.body.director, req.body.imdb_rating, req.body.tomatoes_critics, req.body.tomatoes_audience, req.body.watched, req.params.id]
+            "UPDATE topmovies SET movie_name = $1, director = $2, release_year = $3, ranking = $4, watched = $5, in_top = $6 WHERE id = $7 returning *",
+            [req.body.movie_name, req.body.director, req.body.release_year, req.body.ranking, req.body.watched, req.body.in_top, req.params.id]
         );
         res.status(200).json({
             status: "success",
@@ -84,7 +84,7 @@ app.put("/api/v1/movies/:id", async (req, res) => {
 
 app.delete("/api/v1/movies/:id", async (req, res) => {
     try {
-        const results = db.query("DELETE FROM movies WHERE id = $1", [req.params.id]);
+        const results = db.query("DELETE FROM topmovies WHERE id = $1", [req.params.id]);
         res.status(204).json({
             status: "success",
         });

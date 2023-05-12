@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div>
             <Header />
-            <AddMovie />
+            {/* <AddMovie /> */}
             <MovieList />
         </div>
     );

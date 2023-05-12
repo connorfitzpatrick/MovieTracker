@@ -1,6 +1,7 @@
 import React, {useEffect, useContext} from 'react';
 import MovieFinder from '../apis/MovieFinder';
 import { MoviesContext } from '../context/MoviesContext';
+import Checkbox from './Checkbox';
 
 const MovieList = (props) => {
     const {movies, setMovies} = useContext(MoviesContext);
@@ -24,11 +25,9 @@ const MovieList = (props) => {
                     <tr className="bg-primary">
                         <th scope="col">Movie</th>
                         <th scope="col">Director</th>
-                        <th scope="col">IMDB</th>
-                        <th scope="col">Critic</th>
-                        <th scope="col">Audience</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">IMDB Rating</th>
                         <th scope="col">Watched?</th>
-                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,17 +36,13 @@ const MovieList = (props) => {
                             <tr key={m.id}>
                                 <td>{m.movie_name}</td>
                                 <td>{m.director}</td>
-                                <td>{m.imdb_rating}</td>
-                                <td>{m.tomatoes_critics}</td>
-                                <td>{m.tomatoes_audience}</td>
+                                <td>{m.release_year}</td>
+                                <td>{m.ranking}</td>
                                 <td>
-                                    <button className="btn btn-warning">Watched</button>
-                                </td>
-                                <td>
-                                    <button className="btn btn-danger">Delete</button>
+                                    <Checkbox whole={m} user={m.id} isWatched={m.watched}></Checkbox>
                                 </td>
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </table>
