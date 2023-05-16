@@ -1,7 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+{/*
+    The checkbox's on this page use react's spring library for animations. The checkbox will represent 
+    whether each movie has been watched or not. Clicking the checkbox will send a PUT method to the API,
+    changing the movies watch status in the database.
+*/}
+
+import React, { useState, useEffect } from "react";
 import MovieFinder from "../apis/MovieFinder"
-import { MoviesContext } from "../context/MoviesContext";
 
 import {
   animated,
@@ -14,10 +18,10 @@ import '../app.css'
 
 
 const Checkbox = (props) => {
-    const id=props.user;
+    // Grab the movie's information from its row in the list
     const movie = props.whole;
-    let history = useNavigate();
-    const { movies } = useContext(MoviesContext);
+    const id=movie.id;
+
     const [watched, setWatched] = useState("");
     const [isChecked, setIsChecked] = useState(props.isWatched);
     const checkboxAnimationRef = useSpringRef();
@@ -29,7 +33,6 @@ const Checkbox = (props) => {
     });
   
     const [checkmarkLength, setCheckmarkLength] = useState(null);
-  
     const checkmarkAnimationRef = useSpringRef();
     const checkmarkAnimationStyle = useSpring({
       x: isChecked ? 0 : checkmarkLength,
@@ -44,6 +47,7 @@ const Checkbox = (props) => {
       [0, 0.1]
     );
 
+    // retrieve data from the list and have the checkbox's reflect the movies watch value in the database 
     useEffect(() => {
         const fetchData = async () => {
           const response = await MovieFinder.get(`/${id}`);
@@ -54,9 +58,7 @@ const Checkbox = (props) => {
       }, []);
 
     const handleChange = async (e) => {
-        console.log("HANDLESUBMI");
-        // e.preventDefault();
-        console.log(movie.movie_name);
+        // send PUT to the api to change whether the movie was watched or not
         const updatedWatch = await MovieFinder.put(`/${id}`, {
             movie_name: movie.movie_name,
             director: movie.director,
@@ -65,17 +67,15 @@ const Checkbox = (props) => {
             watched: !watched,
             in_top: movie.in_top
         });
-        history("/");
     };
   
     return (
       <label>
+        {/* send a PUT to the API when the checkbox is clicked */}
         <input
           type="checkbox"
           onChange={() => {
             setIsChecked(!isChecked);
-            // (e) => setWatched(e.target.value);
-            console.log("change");
             handleChange();
           }}
         />
