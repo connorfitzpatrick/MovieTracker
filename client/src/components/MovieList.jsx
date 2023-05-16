@@ -8,6 +8,7 @@ const MovieList = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // Grab list of movies from the api and store them
                 const response = await MovieFinder.get("/");
                 setMovies(response.data.data.movies);
             } catch (err) {
@@ -31,6 +32,7 @@ const MovieList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
+                    {/* create a row for every movie by mapping each one to a row in the table */}
                     {movies && movies.map((m) => {
                         return (
                             <tr key={m.id}>

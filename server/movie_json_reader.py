@@ -10,7 +10,6 @@ import psycopg2
 
 with urllib.request.urlopen("https://raw.githubusercontent.com/theapache64/top250/master/top250_min.json") as url:
     data = json.load(url)
-    #print(data)
 
 top250 = []
 

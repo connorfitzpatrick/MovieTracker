@@ -5,6 +5,7 @@
 */}
 
 import React, { useState, useEffect } from "react";
+import { MoviesContext } from '../context/MoviesContext';
 import MovieFinder from "../apis/MovieFinder"
 
 import {
