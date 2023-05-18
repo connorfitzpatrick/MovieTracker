@@ -132,7 +132,7 @@ app.get("/api/v1/my_movies/:id", async (req, res) => {
     }
 });
 
-// add movie to list the top250 list (Not used in code)
+// add movie to my watchlist
 app.post("/api/v1/my_movies", async (req, res) => {
     console.log(req.body);
     try {
@@ -154,7 +154,7 @@ app.post("/api/v1/my_movies", async (req, res) => {
     }
 });
 
-// update top250 movie list (not used in code)
+// update top250 movie list
 app.put("/api/v1/my_movies/:id", async (req, res) => {
     try {
         const results = await db.query(
@@ -168,6 +168,18 @@ app.put("/api/v1/my_movies/:id", async (req, res) => {
             }
         });
     } catch (err) {
+        console.log(err);
+    }
+});
+
+// Delete entry from my movie watchlist
+app.delete("/api/v1/my_movies/:id", async (req, res) => {
+    try {
+        const results = db.query("DELETE FROM mymovies WHERE id = $1", [req.params.id]);
+        res.status(204).json({
+            status: "success",
+        });
+    }  catch (err) {
         console.log(err);
     }
 });

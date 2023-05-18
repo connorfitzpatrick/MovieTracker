@@ -11,7 +11,7 @@ const AddMovie = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await MovieFinder.post("/my_movies", {
+            const response = await MovieFinder.post("my_movies", {
                 movie_name: movieName,
                 director: director,
                 release_year: year,

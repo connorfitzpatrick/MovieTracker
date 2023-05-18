@@ -20,6 +20,18 @@ const PersonalList = (props) => {
         fetchData();
     }, []);
 
+    const handleDelete = async (id) => {
+        try {
+            const response = await MovieFinder.delete(`my_movies/${id}`);
+            setMovies(movies.filter(movie => {
+                return movie.id !== id;
+            }))
+            console.log(response);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <div>
             <AddMovie/>
@@ -55,7 +67,7 @@ const PersonalList = (props) => {
                                     </td>
                                     <td>
                                         <button
-                                        // onClick={(e) => handleDelete(e, restaurant.id)}
+                                        onClick={() => handleDelete(m.id)}
                                         className="btn btn-danger"
                                         >
                                         Delete
