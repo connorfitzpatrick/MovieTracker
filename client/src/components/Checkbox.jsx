@@ -23,7 +23,7 @@ const Checkbox = (props) => {
     const movie = props.whole;
     const id=movie.id;
 
-    const [watched, setWatched] = useState("");
+    const [watched, setWatched] = useState(props.isWatched);
     const [isChecked, setIsChecked] = useState(props.isWatched);
     const checkboxAnimationRef = useSpringRef();
     const checkboxAnimationStyle = useSpring({
@@ -49,39 +49,31 @@ const Checkbox = (props) => {
     );
 
     // retrieve data from the list and have the checkbox's reflect the movies watch value in the database 
-    useEffect(() => {
-        const fetchData = async () => {
-          var response;
-          if (props.buttonsState) {
-            console.log("HO");
-            const response = await MovieFinder.get(`my_movies/${id}`);
-            console.log(response);
-          } else {
-            console.log("HI");
-            const response = await MovieFinder.get(`movies/${id}`);
-          }
-          // console.log(props.buttonsState);
-          // console.log(response);
-          setWatched(response.data.data.movie.watched);
-          // console.log(movie.name);
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //       var response;
+    //       if (props.buttonsState) {
+    //         console.log("HO");
+    //         const response = await MovieFinder.get(`my_movies/${id}`);
+    //         console.log(response);
+    //         setWatched(response.data.data.movie.watched);
+    //       } else {
+    //         console.log("HI");
+    //         const response = await MovieFinder.get(`movies/${id}`);
+    //         setWatched(response.data.data.movie.watched);
+    //       }
+    //       // console.log(props.buttonsState);
+    //       // console.log(response);
+    //       // setWatched(response.data.data.movie.watched);
+    //       // console.log(movie.name);
+    //     };
     
-        fetchData(); 
-      }, []);
+    //     fetchData(); 
+    //   }, []);
 
     const handleChange = async (e) => {
         // send PUT to the api to change whether the movie was watched or not
-        if (!props.buttonsState) {
-          const updatedWatch = await MovieFinder.put(`movies/${id}`, {
-              movie_name: movie.movie_name,
-              director: movie.director,
-              release_year: movie.release_year,
-              ranking: movie.ranking,
-              watched: !watched,
-              in_top: movie.in_top
-          });
-          // console.log(movie.movie_name);
-        } else {
+        if (props.buttonsState) {
           const updatedWatch = await MovieFinder.put(`my_movies/${id}`, {
             movie_name: movie.movie_name,
             director: movie.director,
@@ -89,9 +81,18 @@ const Checkbox = (props) => {
             ranking: movie.ranking,
             watched: !watched,
             in_top: movie.in_top
-        });
-        // console.log(movie.movie_name);
+          });
+        } else {
+            const updatedWatch = await MovieFinder.put(`movies/${id}`, {
+              movie_name: movie.movie_name,
+              director: movie.director,
+              release_year: movie.release_year,
+              ranking: movie.ranking,
+              watched: !watched,
+              in_top: movie.in_top
+          });
         }
+        setWatched(!watched)
     };
   
     return (

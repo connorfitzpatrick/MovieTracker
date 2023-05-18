@@ -154,6 +154,24 @@ app.post("/api/v1/my_movies", async (req, res) => {
     }
 });
 
+// update top250 movie list (not used in code)
+app.put("/api/v1/my_movies/:id", async (req, res) => {
+    try {
+        const results = await db.query(
+            "UPDATE mymovies SET movie_name = $1, director = $2, release_year = $3, ranking = $4, watched = $5, in_top = $6 WHERE id = $7 returning *",
+            [req.body.movie_name, req.body.director, req.body.release_year, req.body.ranking, req.body.watched, req.body.in_top, req.params.id]
+        );
+        res.status(200).json({
+            status: "success",
+            data: {
+                movie: results.rows[0],
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
 // http://localhost:3005/api/v1/movies
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
