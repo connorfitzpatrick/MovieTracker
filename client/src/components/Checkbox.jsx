@@ -51,8 +51,19 @@ const Checkbox = (props) => {
     // retrieve data from the list and have the checkbox's reflect the movies watch value in the database 
     useEffect(() => {
         const fetchData = async () => {
-          const response = await MovieFinder.get(`/${id}`);
+          var response;
+          if (props.buttonsState) {
+            console.log("HO");
+            const response = await MovieFinder.get(`my_movies/${id}`);
+            console.log(response);
+          } else {
+            console.log("HI");
+            const response = await MovieFinder.get(`movies/${id}`);
+          }
+          // console.log(props.buttonsState);
+          // console.log(response);
           setWatched(response.data.data.movie.watched);
+          // console.log(movie.name);
         };
     
         fetchData(); 
@@ -60,7 +71,18 @@ const Checkbox = (props) => {
 
     const handleChange = async (e) => {
         // send PUT to the api to change whether the movie was watched or not
-        const updatedWatch = await MovieFinder.put(`/${id}`, {
+        if (!props.buttonsState) {
+          const updatedWatch = await MovieFinder.put(`movies/${id}`, {
+              movie_name: movie.movie_name,
+              director: movie.director,
+              release_year: movie.release_year,
+              ranking: movie.ranking,
+              watched: !watched,
+              in_top: movie.in_top
+          });
+          // console.log(movie.movie_name);
+        } else {
+          const updatedWatch = await MovieFinder.put(`my_movies/${id}`, {
             movie_name: movie.movie_name,
             director: movie.director,
             release_year: movie.release_year,
@@ -68,6 +90,8 @@ const Checkbox = (props) => {
             watched: !watched,
             in_top: movie.in_top
         });
+        // console.log(movie.movie_name);
+        }
     };
   
     return (

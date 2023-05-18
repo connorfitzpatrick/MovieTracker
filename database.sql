@@ -1,3 +1,7 @@
+-- Enter Database:
+-- \c movies 
+
+
 CREATE TABLE movies (
     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
     movie_name VARCHAR(200),
@@ -33,3 +37,18 @@ INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_
 INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('Cats', 'Tom Hooper', 2020, 4.0, FALSE, FALSE);
 INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('Shrek', 'Vicky Jenson', 2002, 8.7, TRUE, TRUE);
 INSERT INTO topmovies (movie_name, director, release_year, ranking, watched, in_top) values ('2001 A Space Odyssey', 'Stanley Kubrick', 1967, 8.3, TRUE, TRUE);
+
+
+
+CREATE TABLE mymovies (
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+    movie_name VARCHAR(200),
+    director VARCHAR(200),
+    release_year int,
+    ranking decimal DEFAULT 5.0,
+    watched BOOLEAN,
+    in_top BOOLEAN DEFAULT FALSE
+);
+
+INSERT INTO mymovies (movie_name, director, release_year, ranking, watched, in_top) values ('The Social Network', 'David Fincher', 2010, 5.0, TRUE, FALSE);
+INSERT INTO mymovies (movie_name, director, release_year, ranking, watched, in_top) values ('Jaws', 'Steven Spielberg', 1987, 5.0, FALSE, FALSE);

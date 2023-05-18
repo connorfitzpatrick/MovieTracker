@@ -1,3 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.4px;
+}
+
+.font-weight-light {
+  font-weight:300!important;
+}
+
+.display-1 {
+  font-size:6rem;
+  font-weight:300;
+  line-height:1.2;
+}
+
+.text-center {
+  text-align:center!important;
+}
+
+.list-group {
+  border-top:inherit!important;
+  border-bottom:inherit!important;
+}
+
+.table-container {
+  margin: 0 auto;
+  margin-top: 50px;
+  max-width: var(--sm);
+  padding: var(--sm-spacing);
+  background: var(--bg2);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.table {
+  width: 90%;
+  text-align: center;
+  border-collapse:collapse;
+  border-radius: var(8px);
+  overflow: hidden;
+}
+
+.thead {
+  position: sticky;
+  z-index: 100;
+}
+
+.trHead {
+  background: var(rgb(255,255,255));
+}
+
+.th {
+  padding: var(8px);
+  color: var(--text);
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.trBody {
+  background: var(rgb(255,255,255));
+}
+
+.td {
+  padding: var(8px);
+  border: 1px solid var(rgb(237, 237, 237));
+  font-size: 14px;
+}
+
 input[type="checkbox"] {
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
@@ -57,3 +133,27 @@ input[type="checkbox"] {
   .react-switch-label:active .react-switch-button {
     width: 120px;
   }
+  .AddButton {
+
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: gray;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+.Component {
+
+    color: white;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: darkblue;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+
+}

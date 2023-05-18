@@ -7,10 +7,12 @@
 import React, { useState, createContext } from "react";
 
 export const MoviesContext = createContext();
+// export const ButtonContext = createContext();
 
 export const MoviesContextProvider = (props) => {
+    // movies: list of movies from backend server
+    // setMovies: function to update list
     const [movies, setMovies] = useState([]);
-
     return (
         <MoviesContext.Provider value={{ movies, setMovies }}>
             {props.children}
