@@ -13,8 +13,12 @@ export const MoviesContextProvider = (props) => {
     // movies: list of movies from backend server
     // setMovies: function to update list
     const [movies, setMovies] = useState([]);
+
+    const addMovies = (movie) => {
+        setMovies([...movies, movie]);
+    };
     return (
-        <MoviesContext.Provider value={{ movies, setMovies }}>
+        <MoviesContext.Provider value={{ movies, setMovies, addMovies }}>
             {props.children}
         </MoviesContext.Provider>
     );

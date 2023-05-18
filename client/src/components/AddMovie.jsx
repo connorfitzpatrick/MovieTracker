@@ -1,19 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import MovieFinder from "../apis/MovieFinder"
+import { MoviesContext } from '../context/MoviesContext';
 
 const AddMovie = () => {
-    const [name, setName] = useState("")
-    const [location, setLocation] = useState("")
-    const [priceRange, setPriceRange] = useState("Price Range")
+    const {addMovies} = useContext(MoviesContext);
+    const [movieName, setMovieName] = useState("");
+    const [director, setDirector] = useState("");
+    const [year, setYear] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await MovieFinder.post("/", {
-                name: name,
-                location: location,
-                price_range: priceRange
+            const response = await MovieFinder.post("/my_movies", {
+                movie_name: movieName,
+                director: director,
+                release_year: year,
+                ranking: 5.0,
+                watched: false,
+                in_top: false,
             })
+            addMovies(response.data.data.movie);
+            
             console.log(response)
         } catch (err) {
             console.log(err);
@@ -26,35 +33,30 @@ const AddMovie = () => {
                 <div className="form-row">
                     <div className="col">
                         <input 
-                            value={name} 
-                            onChange={(e) => setName(e.target.value)} 
+                            value={movieName} 
+                            onChange={(e) => setMovieName(e.target.value)} 
                             type="text" 
                             className="form-control" 
-                            placeholder="name"
+                            placeholder="Movie Name"
                         />
                     </div>
                     <div className="col">
                         <input 
-                            value={location} 
-                            onChange={(e) => setLocation(e.target.value)}
+                            value={director} 
+                            onChange={(e) => setDirector(e.target.value)}
                             className="form-control" 
                             type="text" 
-                            placeholder="location"
+                            placeholder="Director"
                         />
                     </div>
                     <div className="col">
-                        <select 
-                            value={priceRange}
-                            onChange={(e) => setPriceRange(e.target.value)}
-                            className="custom-select mb-1 mr-sm-2"
-                        >
-                            <option disabled>Price Range</option>
-                            <option value="1">$</option>
-                            <option value="2">$$</option>
-                            <option value="3">$$$</option>
-                            <option value="4">$$$$</option>
-                            <option value="5">$$$$$</option>
-                        </select>
+                        <input 
+                            value={year} 
+                            onChange={(e) => setYear(e.target.value)}
+                            className="form-control" 
+                            type="text" 
+                            placeholder="Release Year"
+                        />
                     </div>
                     <button onClick={handleSubmit} type="submit" className="btn btn-primary">Add</button>
                 </div>

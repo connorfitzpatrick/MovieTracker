@@ -4,7 +4,7 @@ const Header = (props) => {
     if (props.buttonsState) {
         return (
             <div>
-                <h1 className="font-weight-light display-1 text-center">My Movie List</h1>
+                <h1 className="font-weight-light display-1 text-center">My Movie Watchlist</h1>
             </div>
         )
     } else {
