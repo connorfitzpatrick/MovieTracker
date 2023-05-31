@@ -1,12 +1,14 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import { MoviesContext, ButtonContext } from '../context/MoviesContext';
 import MovieFinder from '../apis/MovieFinder';
 import Checkbox from './Checkbox';
 import AddMovie from '../components/AddMovie';
+import UpdateMovie from '../components/UpdateMovie';
 
 
 const PersonalList = (props) => {
     const {movies, setMovies} = useContext(MoviesContext);
+    const [editingId, setEditingId] = useState(-1);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -19,6 +21,28 @@ const PersonalList = (props) => {
 
         fetchData();
     }, []);
+
+    const handleEdit = (id) => {
+        console.log(id);
+        if (editingId != -1) {
+            const handleUpdate = async (id) => {
+                //https://stackoverflow.com/questions/70596281/how-can-i-get-a-value-from-a-child-component-to-parent-screen-in-react-native
+                // try {
+                //     const response = await MovieFinder.update(`my_movies/${id}`);
+                //     console.log('response.data')
+                // } catch (err) {
+                //     console.log(err);
+                // }
+            console.log("Trying to update");
+            }
+            console.log({editingId});
+            setEditingId(-1);
+        }
+        else {
+            setEditingId(id);
+            console.log({editingId});
+        }
+    }
 
     const handleDelete = async (id) => {
         try {
@@ -51,7 +75,7 @@ const PersonalList = (props) => {
                         {movies && movies.map((m) => {
                             return (
                                 <tr className="trBody" key={m.id}>
-                                    <td className="td">{m.movie_name}</td>
+                                    <td className="td"><UpdateMovie id={m.id} editingId={editingId} text={m.movie_name}/></td>
                                     <td className="td">{m.director}</td>
                                     <td className="td">{m.release_year}</td>
                                     <td className="td">
@@ -59,7 +83,7 @@ const PersonalList = (props) => {
                                     </td>
                                     <td>
                                         <button
-                                        // onClick={(e) => handleUpdate(e, restaurant.id)}
+                                        onClick={(e) => handleEdit(m.id)}
                                         className="btn btn-warning"
                                         >
                                         Update

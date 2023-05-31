@@ -16,8 +16,8 @@ const Home = () => {
 
     return (
         <div>
-            <Header buttonsState={buttonState}/>
             <Button onClick={handleClick} text={buttonText}/>
+            <Header buttonsState={buttonState}/>
             {buttonState ? <PersonalList handleClick={handleClick} buttonsState={buttonState}/> : <Top250List buttonsState={buttonState}/>}
         </div>
     );

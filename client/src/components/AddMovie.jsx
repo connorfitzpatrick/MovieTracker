@@ -28,41 +28,46 @@ const AddMovie = () => {
     }
 
     return (
-        <div className="mb-4">
-            <form action="">
-                <div className="form-row">
-                    <div className="col">
-                        <input 
-                            value={movieName} 
-                            onChange={(e) => setMovieName(e.target.value)} 
-                            type="text" 
-                            className="form-control" 
-                            placeholder="Movie Name"
-                        />
-                    </div>
-                    <div className="col">
-                        <input 
-                            value={director} 
-                            onChange={(e) => setDirector(e.target.value)}
-                            className="form-control" 
-                            type="text" 
-                            placeholder="Director"
-                        />
-                    </div>
-                    <div className="col">
-                        <input 
-                            value={year} 
-                            onChange={(e) => setYear(e.target.value)}
-                            className="form-control" 
-                            type="text" 
-                            placeholder="Release Year"
-                        />
-                    </div>
+<div className="d-flex justify-content-center">
+    <div className="mb-4">
+        <form action="">
+            <div className="d-flex align-items-center">
+                <div className="flex-grow-1 pr-2">
+                    <input 
+                        value={movieName} 
+                        onChange={(e) => setMovieName(e.target.value)} 
+                        type="text" 
+                        className="form-control movie-input" 
+                        placeholder="Movie Name"
+                    />
+                </div>
+                <div className="flex-grow-2 pr-2">
+                    <input 
+                        value={director} 
+                        onChange={(e) => setDirector(e.target.value)}
+                        className="form-control director-input" 
+                        type="text" 
+                        placeholder="Director"
+                    />
+                </div>
+                <div className="flex-grow-2 pr-2">
+                    <input 
+                        value={year} 
+                        onChange={(e) => setYear(e.target.value)}
+                        className="form-control release-input" 
+                        type="text" 
+                        placeholder="Year"
+                    />
+                </div>
+                <div>
                     <button onClick={handleSubmit} type="submit" className="btn btn-primary">Add</button>
                 </div>
-            </form>
-        </div>
-    );
+            </div>
+        </form>
+    </div>
+</div>
+
+   );
 };
 
 export default AddMovie;
