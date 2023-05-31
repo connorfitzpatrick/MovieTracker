@@ -23,7 +23,7 @@ const Top250List = (props) => {
 
     return (
         <div className="table-container">
-            <table className="table">
+            <table className="table centered-table">
                 <thead className="thead">
                     <tr className="trhead">
                         <th className="trHead" scope="col">Movie</th>

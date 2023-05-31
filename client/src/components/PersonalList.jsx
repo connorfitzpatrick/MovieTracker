@@ -60,7 +60,7 @@ const PersonalList = (props) => {
         <div>
             <AddMovie/>
             <div className="table-container">
-                <table className="table">
+                <table className="table centered-table">
                     <thead className="thead">
                         <tr className="trhead">
                             <th className="trHead" scope="col">Movie</th>

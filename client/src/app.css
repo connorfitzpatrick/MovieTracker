@@ -30,13 +30,12 @@ body {
 }
 
 .table-container {
-  margin: 0 auto;
-  margin-top: 50px;
-  max-width: var(--sm);
-  padding: var(--sm-spacing);
-  background: var(--bg2);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: center;
+}
+
+.centered-table {
+  margin: auto;
 }
 
 .table {
