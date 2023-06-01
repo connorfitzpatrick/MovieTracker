@@ -1,3 +1,4 @@
-### WORK IN PROGRESS 5/11
+### The app was built using a PERN Stack (Postgres, Express.js, React.js, and Node).
 
-### This is my movie tracker app that acts as a checklist for watching internets top 250 movies
+### This is my MovieTracker app that acts as a personal list of movies that you are looking to watch.
+### The app also keeps a list of the top 250 movies on the internet, and whether or not you have watched them.
