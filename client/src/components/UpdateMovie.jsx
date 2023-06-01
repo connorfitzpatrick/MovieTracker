@@ -1,48 +1,40 @@
-import React, { useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import MovieFinder from "../apis/MovieFinder"
 import { MoviesContext } from '../context/MoviesContext';
 
 const UpdateMovie = (props) => {
     const {addMovies} = useContext(MoviesContext);
-    const [text, setText] = useState(props.text);
+    const [input, setInput] = useState(props.inputText);
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault()
-    //     try {
-    //         const response = await MovieFinder.post("my_movies", {
-    //             movie_name: movieName,
-    //             director: director,
-    //             release_year: year,
-    //             ranking: 5.0,
-    //             watched: false,
-    //             in_top: false,
-    //         }) 
-    //         addMovies(response.data.data.movie);
-            
-    //         console.log(response)
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
+    const handleChange = (e) => {
+        setInput(e.target.value);
+        props.setInputMovieName(e.target.value);
+        console.log(props.inputText);
+    }
 
-
+    useEffect(() => {
+        setInput(props.inputText);
+    }, [props.inputText]);
 
     // https://stackoverflow.com/questions/63505919/how-to-convert-a-td-td-into-input-onclick-in-react
     if (props.editingId == props.id) {
         return (
             <div>
-                <input 
-                    value={text} 
-                    onChange={(e) => setText(e.target.value)}
-                >
-                </input>
+                <input
+                    type="text"
+                    value={props.inputMovieName}
+                    onChange={(e) => {
+                        props.setInputMovieName(e.target.value);
+                        props.setInputText(e.target.value);
+                    }}        
+                />
             </div>
         );
     }
     else {
         return (
             <div>
-                {props.text}
+                {props.inputText}
             </div>
         )
     }
