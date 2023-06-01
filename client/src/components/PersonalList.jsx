@@ -9,8 +9,8 @@ const PersonalList = (props) => {
     const [inputMovieName, setInputMovieName] = useState("");
     const [inputDirector, setInputDirector] = useState("");
     const [inputYear, setInputYear] = useState("");
-    const [updateBtnText, setUpdateBtnText] = useState("Update");
     const [editingId, setEditingId] = useState(-1);
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -26,14 +26,9 @@ const PersonalList = (props) => {
 
     const handleUpdateButton = (id, m) => {
         if (editingId != -1) {
-            console.log(inputYear);
-            console.log(m.watched);
-            console.log(m.ranking);
-            console.log(m.in_top);
             const handleUpdate = async (id) => {
                 //https://stackoverflow.com/questions/70596281/how-can-i-get-a-value-from-a-child-component-to-parent-screen-in-react-native
                 try {
-                    console.log("TRYING");
                     const response = await MovieFinder.put(`my_movies/${id}`, {
                         movie_name: inputMovieName,
                         director: inputDirector,
@@ -42,21 +37,16 @@ const PersonalList = (props) => {
                         watched: m.watched,
                         in_top: m.in_top
                       });
-                    console.log("Response received")
                     console.log(response.data.data);
                 } catch (err) {
                     console.log(err);
                 }
-            console.log("Trying to update");
             }
             handleUpdate(id);
-            console.log({editingId});
             setEditingId(-1);
-            setUpdateBtnText("Update")
         }
         else {
             setEditingId(id);
-            setUpdateBtnText("Confirm")
         }
     }
 
@@ -83,7 +73,7 @@ const PersonalList = (props) => {
                         editingId={editingId}
                         handleUpdateButton={(id) => handleUpdateButton(id, m)}
                         buttonsState={props.buttonsState}
-                        // state variable and callback to update its value
+                        // state variables and callbacks to update their value
                         inputMovieName={inputMovieName}
                         setInputMovieName={setInputMovieName}
                         inputDirector={inputDirector}

@@ -21,10 +21,12 @@ const MovieRow = (props) => {
 
   return (
     <tr className="trBody" key={props.m.id}>
+        {/* MOVIE NAME */}
       <td className="td">
         {props.editingId === props.m.id ? (
           <input
             type="text"
+            className="form-control input-text"
             value={inputMovieText}
             onChange={(e) => {
                 setInputMovieText(e.target.value);
@@ -36,10 +38,11 @@ const MovieRow = (props) => {
         )}
       </td>
 
-      
+      {/* DIRECTOR */}
       <td className="td">
         {props.editingId === props.m.id ? (
           <input
+            className="form-control input-text"
             type="text"
             value={inputDirectorText}
             onChange={(e) => {
@@ -52,12 +55,13 @@ const MovieRow = (props) => {
         )}
       </td>
 
-{/*        */}
-<td className="td">
+{/* RELEASE YEAR */}
+<td className="td td-year">
         {props.editingId === props.m.id ? (
           <input
             type="text"
             value={inputYearText}
+            className="form-control input-text"
             onChange={(e) => {
                 setInputYearText(e.target.value);
                 props.setInputYear(e.target.value);

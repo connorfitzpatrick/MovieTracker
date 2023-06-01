@@ -47,29 +47,6 @@ const Checkbox = (props) => {
       [0, 0.1]
     );
 
-    // retrieve data from the list and have the checkbox's reflect the movies watch value in the database 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       var response;
-    //       if (props.buttonsState) {
-    //         console.log("HO");
-    //         const response = await MovieFinder.get(`my_movies/${id}`);
-    //         console.log(response);
-    //         setWatched(response.data.data.movie.watched);
-    //       } else {
-    //         console.log("HI");
-    //         const response = await MovieFinder.get(`movies/${id}`);
-    //         setWatched(response.data.data.movie.watched);
-    //       }
-    //       // console.log(props.buttonsState);
-    //       // console.log(response);
-    //       // setWatched(response.data.data.movie.watched);
-    //       // console.log(movie.name);
-    //     };
-    
-    //     fetchData(); 
-    //   }, []);
-
     const handleChange = async (e) => {
         // send PUT to the api to change whether the movie was watched or not
         if (props.buttonsState) {

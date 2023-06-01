@@ -199,3 +199,15 @@ input[type="checkbox"] {
   display: inline-block;
   font-size: 16px;
 }
+
+.td-year {
+  width: 10%;
+}
+
+.td-text {
+  width: 34%;
+}
+
+.input-text {
+  font-size: 13px;
+}
