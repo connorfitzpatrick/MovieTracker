@@ -7,7 +7,8 @@ import Checkbox from './Checkbox';
 const MovieRow = (props) => {
   const { movies, setMovies } = useContext(MoviesContext);
   const [inputMovieText, setInputMovieText] = useState(props.m.movie_name || '');
-  const [inputDirectorText, setDirectorText] = useState(props.m.director || '');
+  const [inputDirectorText, setInputDirectorText] = useState(props.m.director || '');
+  const [inputYearText, setInputYearText] = useState(props.m.release_year || '');
   
   const handleDelete = async (id) => {
     try {
@@ -29,28 +30,43 @@ const MovieRow = (props) => {
             onChange={(e) => {
                 setInputMovieText(e.target.value);
                 props.setInputMovieName(e.target.value);
-                console.log(props.inputMovieName);
               }}
           />
         ) : (
           inputMovieText
         )}
       </td>
+
+      
       <td className="td">
-        <UpdateMovie
-          id={props.m.id}
-          editingId={props.editingId}
-          inputText={props.m.director}
-          setInputText={setInputMovieText}
+        {props.editingId === props.m.id ? (
+          <input
+            type="text"
+            value={inputDirectorText}
+            onChange={(e) => {
+                setInputDirectorText(e.target.value);
+                props.setInputDirector(e.target.value);
+            }}
         />
+        ) : (
+          inputDirectorText
+        )}
       </td>
-      <td className="td">
-        <UpdateMovie
-          id={props.m.id}
-          editingId={props.editingId}
-          inputText={props.m.release_year}
-          setInputText={props.setInputMovieText}
+
+{/*        */}
+<td className="td">
+        {props.editingId === props.m.id ? (
+          <input
+            type="text"
+            value={inputYearText}
+            onChange={(e) => {
+                setInputYearText(e.target.value);
+                props.setInputYear(e.target.value);
+            }}
         />
+        ) : (
+          inputYearText
+        )}
       </td>
       <td className="td">
         <Checkbox

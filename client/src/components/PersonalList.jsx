@@ -74,8 +74,8 @@ const PersonalList = (props) => {
                         setInputMovieName={setInputMovieName}
                         inputDirector={inputDirector}
                         setInputDirector={setInputDirector}
-                        // inputYear={inputYear}
-                        // setInputYear={setInputYear}
+                        inputYear={inputYear}
+                        setInputYear={setInputYear}
 
                     />
                     ))}
