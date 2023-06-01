@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { MoviesContext } from '../context/MoviesContext';
 import MovieFinder from '../apis/MovieFinder';
-import UpdateMovie from './UpdateMovie';
 import Checkbox from './Checkbox';
 
 const MovieRow = (props) => {
@@ -78,7 +77,12 @@ const MovieRow = (props) => {
       </td>
       <td>
         <button
-          onClick={() => props.handleUpdateButton(props.m.id)}
+          onClick={() => {
+              props.setInputMovieName(inputMovieText);
+              props.setInputDirector(inputDirectorText);
+              props.setInputYear(inputYearText);
+              props.handleUpdateButton(props.m.id)
+            }}
           className={`btn ${props.editingId === props.m.id ? 'btn-confirm' : 'btn-warning'}`}
         >
           {props.editingId === props.m.id ? 'Confirm' : 'Update'}

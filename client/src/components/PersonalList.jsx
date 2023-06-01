@@ -1,11 +1,8 @@
 import React, {useEffect, useContext, useState} from 'react';
 import { MoviesContext } from '../context/MoviesContext';
 import MovieFinder from '../apis/MovieFinder';
-import Checkbox from './Checkbox';
 import AddMovie from '../components/AddMovie';
-import UpdateMovie from '../components/UpdateMovie';
 import MovieRow from '../components/MovieRow';
-
 
 const PersonalList = (props) => {
     const {movies, setMovies} = useContext(MoviesContext);
@@ -27,20 +24,32 @@ const PersonalList = (props) => {
         fetchData();
     }, []);
 
-    const handleUpdateButton = (id) => {
-        console.log(id);
+    const handleUpdateButton = (id, m) => {
         if (editingId != -1) {
-            console.log(inputMovieName);
+            console.log(inputYear);
+            console.log(m.watched);
+            console.log(m.ranking);
+            console.log(m.in_top);
             const handleUpdate = async (id) => {
                 //https://stackoverflow.com/questions/70596281/how-can-i-get-a-value-from-a-child-component-to-parent-screen-in-react-native
-                // try {
-                //     const response = await MovieFinder.update(`my_movies/${id}`);
-                //     console.log('response.data')
-                // } catch (err) {
-                //     console.log(err);
-                // }
+                try {
+                    console.log("TRYING");
+                    const response = await MovieFinder.put(`my_movies/${id}`, {
+                        movie_name: inputMovieName,
+                        director: inputDirector,
+                        release_year: inputYear,
+                        ranking: m.ranking,
+                        watched: m.watched,
+                        in_top: m.in_top
+                      });
+                    console.log("Response received")
+                    console.log(response.data.data);
+                } catch (err) {
+                    console.log(err);
+                }
             console.log("Trying to update");
             }
+            handleUpdate(id);
             console.log({editingId});
             setEditingId(-1);
             setUpdateBtnText("Update")
@@ -58,7 +67,12 @@ const PersonalList = (props) => {
                 <table className="table centered-table">
                 <thead className="thead">
                     <tr className="trhead">
-                    {/* ... table headers ... */}
+                        <th className="trHead" scope="col">Movie</th>
+                        <th className="trHead" scope="col">Director</th>
+                        <th className="trHead" scope="col">Year</th>
+                        <th className="trHead" scope="col">Watched?</th>
+                        <th className="trHead" scope="col">Edit</th>
+                        <th className="trHead" scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody className="tbody">
@@ -67,7 +81,7 @@ const PersonalList = (props) => {
                         key={m.id}
                         m={m}
                         editingId={editingId}
-                        handleUpdateButton={handleUpdateButton}
+                        handleUpdateButton={(id) => handleUpdateButton(id, m)}
                         buttonsState={props.buttonsState}
                         // state variable and callback to update its value
                         inputMovieName={inputMovieName}
